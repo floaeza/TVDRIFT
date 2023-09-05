@@ -2,8 +2,28 @@
 
 var n = 0;
 function Red(){
-    var relo = location.href;
-    location.href = relo;
+        // media = hcap.Media.createMedia({
+        //     "url" : 'http://10.40.3.10/Multimedia/back.mp4', 
+        //     "mimeType" : "video/mp4",  
+        // });
+        // hcap.Media.startUp({
+        //     "onSuccess" : function() {
+        //         Debug('Exito');
+        //         media.play({
+        //             //"repeatCount" : 2,
+        //             "onSuccess" : function() {
+        //                 Debug('REPRODUCIENDO CANAL');
+        //             }, 
+        //             "onFailure" : function(f) {
+        //                 Debug('FALLO');
+        //             }
+        //         });
+        //     },
+        //     "onFailure" : function(f) {
+        //         Debug('FALLO');
+        //     }
+        // });
+
 }
 
 function Blue(){
@@ -90,7 +110,9 @@ function Menu(){
         //}
         
         //GoPage('menu.php', Device['MenuId'], 'Menu');
-        StopChannel();
+        //StopChannel();
+        //StopVideo();
+        //PlayChannel('igmp://239.110.101.177', '5121');
         GoPage('menu.php', Device['MenuId'], 'Menu');
         
     } else if(CurrentModule === 'Tv' && Device['Services']['ActiveMenu'] === false){

@@ -99,6 +99,27 @@
                 Vendor      = 'Lg';
             }
         };
+        media = hcap.Media.createMedia({
+            "url" : 'http://10.40.3.10/Multimedia/back.mp4', 
+            "mimeType" : "video/mp4",  
+        });
+        hcap.Media.startUp({
+            "onSuccess" : function() {
+                Debug('Exito');
+                media.play({
+                    //"repeatCount" : 2,
+                    "onSuccess" : function() {
+                        Debug('REPRODUCIENDO CANAL');
+                    }, 
+                    "onFailure" : function(f) {
+                        Debug('FALLO');
+                    }
+                });
+            },
+            "onFailure" : function(f) {
+                Debug('FALLO');
+            }
+        });
 
         hcap.network.getNetworkDevice(GetNetwork);
         

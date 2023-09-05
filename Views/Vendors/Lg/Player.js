@@ -27,52 +27,54 @@
  * ****************************************************************************/
 
     function PlayChannel(Source, Port){
-        Debug(Source);
-        if (media != null) {
-            Debug('Primer canal');
-            StopChannel();
-        }
-        media = hcap.Media.createMedia({
-            "url" : Source, 
-            "mimeType" : "video/mp4",  
-        });
+        // Debug(Source);
+        // if (media != null) {
+        //     Debug('Primer canal');
+        //     StopChannel();
+        // }
+        // media = hcap.Media.createMedia({
+        //     "url" : Source, 
+        //     "mimeType" : "video/mp4",  
+        // });
         // Detiene el canal actual
         // media = hcap.Media.createMedia({
         //     "url" : Source, 
         //     "mimeType" : "video/mp4",  
         // });
+        //StopVideo();
         // Elimina la etiqueta igmp o rf, ya que el parametro solo acepta numeros en el string
-        // var Src = Source.replace('igmp://', '');
-        // hcap.channel.requestChangeCurrentChannel({
-        //     'channelType':hcap.channel.ChannelType.IP, 
-        //     'ip':  Src,
-        //     'port': parseInt(Port, 10),
-        //     'ipBroadcastType': hcap.channel.IpBroadcastType.UDP,
-        //     'onSuccess' : function() {
-        //         Debug('onSuccess');
-        //     }, 
-        //     'onFailure' : function(f) {
-        //         Debug('onFailure : errorMessage = ' + f.errorMessage);
-        //     }
-        // });
-
-        hcap.Media.startUp({
-            "onSuccess" : function() {
-                Debug('Exito');
-                media.play({
-                    //"repeatCount" : 2,
-                    "onSuccess" : function() {
-                        Debug('REPRODUCIENDO CANAL');
-                    }, 
-                    "onFailure" : function(f) {
-                        Debug('FALLO');
-                    }
-                });
-            },
-            "onFailure" : function(f) {
-                Debug('FALLO');
+        var Src = Source.replace('igmp://', '');
+        hcap.channel.requestChangeCurrentChannel({
+            'channelType':hcap.channel.ChannelType.IP, 
+            'ip':  Src,
+            'port': parseInt(Port, 10),
+            'ipBroadcastType': hcap.channel.IpBroadcastType.UDP,
+            'onSuccess' : function() {
+                Debug('onSuccess');
+                Debug(Source+Port+'CHANNEL INFO');
+            }, 
+            'onFailure' : function(f) {
+                Debug('onFailure : errorMessage = ' + f.errorMessage);
             }
         });
+
+        // hcap.Media.startUp({
+        //     "onSuccess" : function() {
+        //         Debug('Exito');
+        //         media.play({
+        //             //"repeatCount" : 2,
+        //             "onSuccess" : function() {
+        //                 Debug('REPRODUCIENDO CANAL');
+        //             }, 
+        //             "onFailure" : function(f) {
+        //                 Debug('FALLO');
+        //             }
+        //         });
+        //     },
+        //     "onFailure" : function(f) {
+        //         Debug('FALLO');
+        //     }
+        // });
         // Maximiza el video en caso de que no este en pantalla completa
         MaximizeTV();
         
@@ -174,10 +176,10 @@
 
         hcap.channel.stopCurrentChannel({
             'onSuccess' : function() {
-                //Debug('onSuccess');
+                Debug('DETENIDO');
             }, 
             'onFailure' : function(f) {
-                //Debug('onFailure : errorMessage = ' + f.errorMessage);
+                Debug('onFailure : errorMessage = ' + f.errorMessage);
             }
         });
 
@@ -229,3 +231,4 @@
             PercentagePosition = Math.round((PositionAsset * 100) / DurationAsset);
         } 
     }
+
